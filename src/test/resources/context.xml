@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="orderDao" class="dao.OrderDao"/>
+    <bean id="customerDao" class="dao.CustomerDao">
+        <constructor-arg ref="orderDao"/>
+    </bean>
+    <bean id="customerMapper" class="mapper.CustomerMapper"/>
+    <bean id="customerService" class="service.CustomerService">
+        <constructor-arg name="customerDao">
+            <ref bean="customerDao"/>
+        </constructor-arg>
+        <constructor-arg name="customerMapper">
+            <ref bean="customerMapper"/>
+        </constructor-arg>
+    </bean>
+</beans>
