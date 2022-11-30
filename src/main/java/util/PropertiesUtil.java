@@ -8,10 +8,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PropertiesUtil {
 
-    private static final Properties PROPERTIES = new Properties();
-
-    static {
-        initProperties();
     }
 
     public static String get(String key) {
@@ -19,7 +15,7 @@ public class PropertiesUtil {
     }
 
     @SneakyThrows
-    private static void initProperties() {
+
         try (var stream = PropertiesUtil.class.getClassLoader().getResourceAsStream("application.properties")) {
             PROPERTIES.load(stream);
         }
