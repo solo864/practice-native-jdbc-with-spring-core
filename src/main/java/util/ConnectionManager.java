@@ -2,6 +2,7 @@ package util;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -34,8 +35,7 @@ public class ConnectionManager {
         for (int i = 0; i < size; i++) {
             var connection = open();
             var proxyConnection = (Connection) Proxy.newProxyInstance(ConnectionManager.class.getClassLoader(),
-                    new Class[] {Connection.class},
-                    (proxy, method, args) -> method.getName().equals("close") ? pool.add((Connection) proxy)
+
                             : method.invoke(connection, args));
             pool.add(proxyConnection);
             sourceConnection.add(connection);
@@ -56,11 +56,11 @@ public class ConnectionManager {
 
     @SneakyThrows
     private static Connection open() {
-        return pool.take();
+
     }
 
     @SneakyThrows
     private static void loadDriver() {
         Class.forName(PropertiesUtil.get(DRIVER_KEY));
     }
-}
+

@@ -18,7 +18,7 @@ public class PropertiesUtil {
 
     @SneakyThrows
     private static void loadProperties() {
-        try (var stream = PropertiesUtil.class.getClassLoader().getResourceAsStream("properties.properties")) {
+
             PROPERTIES.load(stream);
         }
     }
