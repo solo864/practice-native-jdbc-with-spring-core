@@ -6,13 +6,14 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PropertiesUtil {
+
     private static final Properties PROPERTIES = new Properties();
 
     static {
         loadProperties();
     }
 
-    public static String get(String key) {
+
         return PROPERTIES.getProperty(key);
     }
 
